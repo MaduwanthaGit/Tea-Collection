@@ -15,5 +15,8 @@
   "navigation": "tabstrip",
   "view": "home",
   "transition": "slide",
-  "skin": "flat"
+  "skin": "flat",
+  "skinActive": "#10c4b2",
+  "skinText": "#4c5356",
+  "skinSecondary": "#ffffff"
 }

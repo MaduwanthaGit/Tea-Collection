@@ -1,0 +1,123 @@
+.km-flat .km-switch-handle,
+.km-flat .k-slider-selection,
+.km-flat .km-switch-background,
+.km-flat .km-list fieldset legend {
+  color: #10c4b2;
+}
+.km-flat .km-rowinsert,
+.km-flat .km-state-active,
+.km-flat .km-scroller-pull,
+.km-flat .km-loader:before,
+.km-flat .k-slider-selection,
+.km-flat .km-touch-scrollbar,
+.km-flat .km-pages .km-current-page,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat .km-actionsheet > li > .km-state-active,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked {
+  background: #10c4b2;
+}
+.km-flat .km-filter-wrap > input:focus,
+.km-flat .km-radio-label:before {
+  border-color: #10c4b2;
+}
+.km-flat .km-checkbox-label:before,
+.km-flat .km-checkbox-label:after {
+  color: #10c4b2;
+  border-color: #10c4b2;
+}
+.km-flat .km-radio-label:after {
+  background-color: #10c4b2;
+}
+.km-flat,
+.km-flat .km-navbar,
+.km-flat .k-toolbar,
+.km-flat .km-detail,
+.km-flat .km-content,
+.km-flat .km-filter-wrap:before,
+.km-flat .km-filter-reset .km-clear,
+.km-flat .km-filter-wrap > input,
+.km-flat .km-list input[type=password],
+.km-flat .km-list input[type=search],
+.km-flat .km-list input[type=number],
+.km-flat .km-list input[type=tel],
+.km-flat .km-list input[type=url],
+.km-flat .km-list input[type=email],
+.km-flat .km-list input[type=month],
+.km-flat .km-list input[type=color],
+.km-flat .km-list input[type=week],
+.km-flat .km-list input[type=date],
+.km-flat .km-list input[type=time],
+.km-flat .km-list input[type=datetime],
+.km-flat .km-list input[type=datetime-local],
+.km-flat .km-list input[type=text]:not(.k-input),
+.km-flat .km-list select:not([multiple]),
+.km-flat .km-list .k-dropdown-wrap,
+.km-flat .km-list textarea,
+.km-flat .km-list .k-dropdown-wrap .k-input,
+.km-flat .km-loader h1 {
+  color: #4c5356;
+}
+.km-flat .km-listview-link:after {
+  color: #97a0a4;
+}
+.km-flat .km-content .km-list .km-state-active input[type=password],
+.km-flat .km-content .km-list .km-state-active input[type=search],
+.km-flat .km-content .km-list .km-state-active input[type=number],
+.km-flat .km-content .km-list .km-state-active input[type=tel],
+.km-flat .km-content .km-list .km-state-active input[type=url],
+.km-flat .km-content .km-list .km-state-active input[type=email],
+.km-flat .km-content .km-list .km-state-active input[type=month],
+.km-flat .km-content .km-list .km-state-active input[type=color],
+.km-flat .km-content .km-list .km-state-active input[type=week],
+.km-flat .km-content .km-list .km-state-active input[type=date],
+.km-flat .km-content .km-list .km-state-active input[type=time],
+.km-flat .km-content .km-list .km-state-active input[type=datetime],
+.km-flat .km-content .km-list .km-state-active input[type=datetime-local],
+.km-flat .km-content .km-list .km-state-active input[type=text]:not(.k-input),
+.km-flat .km-content .km-list .km-state-active select:not([multiple]),
+.km-flat .km-content .km-list .km-state-active textarea,
+.km-flat .km-badge,
+.km-flat .km-rowinsert,
+.km-flat .km-rowdelete,
+.km-flat .km-state-active,
+.km-flat .km-switch-label-on,
+.km-flat .km-switch-label-off,
+.km-flat .km-tabstrip .km-button,
+.km-flat .km-popup .k-item,
+.km-flat .km-actionsheet > li > a,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-scroller-pull .km-icon,
+.km-flat .km-popup.km-pane .km-navbar,
+.km-flat .km-popup.km-pane .k-toolbar,
+.km-flat .km-popup.km-pane .km-tabstrip,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat .km-actionsheet > li > .km-state-active,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-state-active .km-listview-link:after,
+.km-flat .km-invalid-msg {
+  color: #ffffff;
+}
+.km-flat .km-loader > *:not(h1),
+.km-flat .km-filter-wrap > input,
+.km-flat .km-switch-handle.km-state-active,
+.km-root .km-flat .km-scroller-refresh span:not(.km-template) {
+  background: #ffffff;
+}

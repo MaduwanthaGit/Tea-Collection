@@ -5,26 +5,33 @@
     <title></title>
     <meta charset="utf-8">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
+
+    <link href="styles/overrides.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
 
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="app.js"></script>
+    
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/home/add.js"></script>
+    <script src="components/home/file_save.js"></script>
     <script src="components/home/index.js"></script>
+    
     <div data-role="layout" data-id="main">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </header>
-
+                
         <footer data-role="footer">
             <div data-role="tabstrip" id="navigation-container">
-                <a href="components/home/view.html" data-icon="home">Home View</a>
+                <a href="components/home/collection.html" data-icon="add">Collection</a>
+                <a href="components/home/add_custommer.html" data-icon="contacts ">Add Custommer</a>
             </div>
         </footer>
     </div>
@@ -35,14 +42,32 @@
                 <span data-role="view-title"></span>
             </div>
         </header>
-
         <footer data-role="footer">
         </footer>
     </div>
-    <!-- START_CUSTOM_CODE_kendoUiMobileApp -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_kendoUiMobileApp -->
+    <script src="components/home/add.js"></script>
+    <script src="components/home/file_save.js"></script>
+    <script src="components/home/index.js"></script>
+    <style>
+    	.center{
+          position: relative;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+        }
+        
+        .inputBox {
+        height:32px;
+        width:220px; 
+    }
+        .right_align{
+            float:right;
+        }
+        .separetor{
+            width:50%;
+            float:left;
+            height:50px;
+        }
+    </style>
 </body>
 
 </html>

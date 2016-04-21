@@ -1,9 +1,36 @@
 'use strict';
+var collectionArr = [];
+var index;
+var Item;
+var app = new kendo.mobile.Application(document.body, {
+                                                        statusBarStyle: "black",
+                                                        transition: 'slide',
+                                                        skin: 'flat',
+                                                        initial: 'components/home/collection.html'
+                                                   });
 
+		/*Waiting for device ready*/
+                 if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+                    document.addEventListener("deviceready", onDeviceReady, false);
+                     
+                } else {
+                  	onDeviceReady();
+                    
+                }
+		/*On device ready*/
+            function onDeviceReady(){
+                navigator.splashscreen.hide();
+                //window.screen.lockOrientation('portrait');
+                //alert(navigator.connection.type);
+                
+            }
+/*var app;
 (function() {
-    var app = {
+    app = {
         data: {}
     };
+    
+        
 	var bootstrap = function() {
         $(function() {
             app.mobileApp = new kendo.mobile.Application(document.body, {
@@ -41,23 +68,112 @@
             return navigator.connection.type !== 'none';
         }
     };
-}());
+}());*/
 
+function initView(){
+    var viewApp = new viewInit();
+    viewApp.run();
+    viewApp._openDB();
+}
+function showView(){
+    var viewApp = new view();
+    viewApp.run();
+    viewApp._openDB();
+}
 
+function showEddit(){
+    alert("app");
+    
+    var edditApp = new eddit();
+    edditApp.run();
+    edditApp._openDB();
+}
 
 function showAdd(){
-     alert("in");
+     //alert("in");
     var DBAppp = new DBApp();
-     alert("1");
+     //alert("1");
     DBAppp.run();
     DBAppp._openDB();
     DBAppp._createTable();
-    alert("done");
+    
+    $("#IDTextField").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    //alert("done");
+}
+function showRemove(){
+    var removeApp = new remove();
+    
+     //alert("1");
+    removeApp.run();
+    removeApp._openDB();
+    $("#IDTextFieldRemove").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
 }
 function show(){
+    alert("1");
     var fileApp = new FileApp();
+    alert("2");
     fileApp.run();
+    alert("3");
     //var DBAppp = new DBApp();
+    fileApp._openDB();
+    alert("4");
+    //fileApp._createTableCollect();
+    alert("4");
+    $("#idField, #weightField, #netWeightField, #advanceField").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) ||
+             // Allow: Ctrl+C
+            (e.keyCode == 67 && e.ctrlKey === true) ||
+             // Allow: Ctrl+X
+            (e.keyCode == 88 && e.ctrlKey === true) ||
+             // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
     alert("dpne");
 }
 

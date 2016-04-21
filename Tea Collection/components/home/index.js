@@ -1,13 +1,13 @@
 'use strict';
 
-app.home = kendo.observable({
+/*app.home = kendo.observable({
     onShow: function() {
-        alert("in");
+        //alert("in");
         var fileApp = new FileApp();
         fileApp.run();
     },
     afterShow: function() {}
-});
+});*/
 
 function FileApp() {
 }
@@ -24,39 +24,106 @@ FileApp.prototype = {
     DbHelper : null,
     nameArr : null,
 	run: function() {
+        alert("f1");
 		var that = this,
     		writeFileButton = document.getElementById("writeFileButton"),
     		readFileButton = document.getElementById("readFileButton"),
-    		deleteFileButton = document.getElementById("deleteFileButton");
+    		deleteFileButton = document.getElementById("deleteFileButton"),
+            exportButton = document.getElementById("exportButton");
         
         that.nameField = document.getElementById("nameField");
 		that.idField = document.getElementById("idField");
         that.weightField = document.getElementById("weightField");
-        that.weightField = document.getElementById("netWeightField");
-		that.ammountField = document.getElementById("ammountField");
+        that.netWeightField = document.getElementById("netWeightField");
+		//that.ammountField = document.getElementById("ammountField");
         that.advanceField = document.getElementById("advanceField");
         $("#writeFileButton").click(
-										 function() { 
-                                             that._readTextFromFile.call(that);
-                                             
-											 that._writeTextToFile.call(that); 
-										 });
+             function() {
+                 if($.trim(that.nameField.innerHTML) === "NOT FOUND"){
+                   alert("Please enter a valid supplier");
+
+                 }
+                 else if($.trim(that.idField.value) != "" &&
+                    $.trim(that.nameField.innerHTML) != "" &&
+                    ($.trim(that.weightField.value) != "" && that.weightField.value != "0") &&
+                    ($.trim(that.netWeightField.value) != "" && that.netWeightField.value != "0") &&
+                    $.trim(that.advanceField.value) != ""){
+
+                        navigator.notification.confirm(
+                            'Are you sure you want to addthis record to '+that.nameField.innerHTML+' (ID:'+that.idField.value+')', // message
+                             function(buttonIndex){
+                                if(buttonIndex == 1){
+
+                                    //that._readTextFromFile.call(that);
+                                    //that._writeTextToFile.call(that); 
+                                    that._insertRecord().call(that);
+                                    //that.insertCollection(that.idField.value,that.nameField.innerHTML,that.weightField.value,that.netWeightField.value,that.advanceField.value).call(that);
+
+                                }else{
+
+                                    return;
+                                } 
+                             },            // callback to invoke with index of button pressed
+                            'Remove Supplier',           // title
+                            ['CONFIRM','CANCEL']     // buttonLabels
+                        );
+                 }else{
+                     alert("please fill all the fields");
+                 }
+
+
+             });
         
-		$("#readFileButton").click(
-										function() {
-											that._readTextFromFile.call(that);
+		$("#exportButton").click(function() {
+            alert("done");
+											that._exportData(1);
 										});
         
 		$("#findButton").click(
 										  function() {
 											  that._getCustommerNameByID.call(that);
 										  });
-        alert("1");
+        alert("f1");
         that.DbHelper = new DBHelper();
-        alert("2");
+        alert("f2");
 		that.fileSystemHelper = new FileSystemHelper();
         console.log(that.fileSystemHelper);
 	},
+    _exportData :function(ID){
+        alert("in");
+        var that = this;
+        that._openDB();
+        var render = function (tx, rs) {
+            
+            // rs contains our SQLite recordset, at this point you can do anything with it
+            // in this case we'll just loop through it and output the results to the console
+            for (var i = 0; i < rs.rows.length; i++) {
+                console.log(rs.rows.item(i).custommer_name);
+                var item = rs.rows.item(i);
+                alert("item.custommer_id");
+                that._readTextFromFile.call(that);
+                that._writeTextToFile(item.custommer_id, item.custommer_name, item.added_date, item.weight,item.net_weight,item.advance); 
+                
+            }
+            alert("here");
+            that._updateStatus();
+            }
+        
+        
+        that.DbHelper.selectRecordsToExport(render);
+    },
+    _updateStatus : function(){
+      var that = this; 
+        that.DbHelper.updateStatus();
+    },
+    _insertRecord : function(){
+        var that = this;
+      	//that.DbHelper.createTableCollection();
+        that.DbHelper.createTableCollection();
+    	that.DbHelper.insertCollection(that.idField.value,that.nameField.innerHTML,that.weightField.value,that.netWeightField.value,that.advanceField.value).call(that);
+
+    },
+   
     _getCustommerNameByID: function(){
     	var that = this;
         that._openDB();
@@ -64,6 +131,7 @@ FileApp.prototype = {
         //that.nameField.innerHTML = that.nameArr;
         
 	},
+    
     _getAllTheData : function (ID) {
         var that = this;
         var nameArr = [];
@@ -75,8 +143,12 @@ FileApp.prototype = {
                 console.log(rs.rows.item(i).custommer_name);
                 nameArr.push(rs.rows.item(i).custommer_name); 
             }
+            if(nameArr.length == 0){
+                that.nameField.innerHTML = "NOT FOUND";
+            }else{
+                that.nameField.innerHTML = nameArr[0];
+            }
             
-            that.nameField.innerHTML = nameArr[0]
         }
         
         that.DbHelper.selectAllRecords(render,ID);
@@ -102,24 +174,26 @@ FileApp.prototype = {
 	_readTextFromFile: function() {
 		var that = this,
 		    fileName = "test_file.txt";
-        alert(fileName);
+       // alert(fileName);
 		if (that._isValidFileName(fileName)) {
-			that.fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
+			that.fileSystemHelper.readTextFromFile(fileName, that.onSuccess, that._onError);
+           // alert("done");
 		}
 		else {
 			var error = { code: 44, message: "Invalid filename"};
 			that._onError(error);
+           // alert("err");
 		}
 	},
     
-	_writeTextToFile: function() {
+	_writeTextToFile: function(ID,name,date,weight,netWeight,advance) {
 		var that = this,
     		fileName = "test_file.txt",
     		text = "";
        	var d = new Date();
 		var createdDate = d.yyyymmdd();
        
-        
+        //alert("in");
         //alert(that.oaldText);
 		if(that.oaldText != null){
             text = that.oaldText+
@@ -128,36 +202,49 @@ FileApp.prototype = {
                 	createdDate+","+
                 	that.weightField.value+","+
                 	that.netWeightField.value+","+
-                	that.ammountField.value+","+
+                	"0"+","+
                 	that.advanceField.value;
         }else{
-            text =  that.idField.value+","+
-                	that.nameField.innerHTML+","+
-                	createdDate+","+
-                	that.weightField.value+","+
-                	that.netWeightField.value+","+
-                	that.ammountField.value+","+
-                	that.advanceField.value;
-            alert(text);
+            text =  ID+","+
+                	name+","+
+                	date.yyyymmdd()+","+
+                	weight+","+
+                	netWeight+","+
+                	"0"+","+
+                	advance;
+            
         }
+        //text = "kl";
+       	    if (that._isValidFileName(fileName)) {
+			that.fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError);
+                that.idField.value = "";
+                that.nameField.innerHTML = "";
+                that.weightField.value = "";
+                that.netWeightField.value = "";
+                that.advanceField.value = "";
+            
+            }
+            else {
+                var error = { code: 44, message: "Invalid filename"};
+                that._onError(error);
+            }
         
-		if (that._isValidFileName(fileName)) {
-			that.fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
-		}
-		else {
-			var error = { code: 44, message: "Invalid filename"};
-			that._onError(error);
-		}
+		
 	},
+    /* _createTableCollect(){
+      //var that = this;
+      //that.DbHelper.createTableCollection();
+    },*/
     onSuccess : function(tx, r) {
         console.log("Your SQLite query was successful!");
     },
 	_onSuccess: function(value) {
         
+        alert("Saved Successfully");
 	},
     
 	_onError: function(error) {
-
+		alert("Save Failed Failed Pleas Try agin");
 		console.log(error);
 	},
     
@@ -267,7 +354,7 @@ FileSystemHelper.prototype = {
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
             that.oaldText = textToWrite;
-            alert("thi"+that.oaldText);
+            //alert("thi"+that.oaldText);
 			onSuccess.call(that, textToWrite);
 		};
         
@@ -331,41 +418,144 @@ DBHelper.prototype = {
 	createTable : function() {
         var that = this;
         that.db.transaction(function(tx) {
-            tx.executeSql("CREATE TABLE IF NOT EXISTS CustommerTable (id INTEGER PRIMARY KEY ASC, custommer_id TEXT UNIQUE, custommer_name TEXT, added_date DATETIME)", []);
+            tx.executeSql("CREATE TABLE IF NOT EXISTS CustommerTable (custommer_id TEXT UNIQUE, custommer_name TEXT, added_date DATETIME)", []);
         });
     },
     
+    createTableCollection : function() {
+       var that = this;
+    	that.db.transaction(function(tx){
+           tx.executeSql("CREATE TABLE IF NOT EXISTS Collection (_id INTEGER PRIMARY KEY AUTOINCREMENT,custommer_id TEXT, custommer_name TEXT, added_date DATETIME, weight TEXT,net_weight TEXT,advance TEXT,status TEXT)", [],
+                        that.onSuccess,
+                        that.onError); 
+        alert("created");
+        });
+    },
+    
+   	insertCollection : function(ID, name, weight, net_weight, advance){
+        var that = this;
+        that.db.transaction(function(tx) {
+                     var cDate = new Date();
+            
+                    tx.executeSql("INSERT INTO Collection(custommer_id, custommer_name, added_date,weight,net_weight,advance,status) VALUES (?,?,?,?,?,?,?)",
+                                  [ID, name, cDate, weight, net_weight, advance,"0"],
+                                  that.onSuccess,
+                                  that.onError);
+                        
+
+                	});
+    },   
+    
+    updateCollection : function(added_date, weight, net_weight, advance){
+        var that = this;
+        that.db.transaction(function(tx){
+            alert("in");
+           tx.executeSql("UPDATE Collection SET weight='"+weight+"',net_weight='"+net_weight+"',advance='"+advance+"' WHERE _id="+added_date,
+                                  that.onSuccess,
+                                  that.onError);
+        });
+    },
+    deleteCollection : function(ID){
+         var that = this;
+        if(ID != null || $trim(ID) != ""){
+            that.db.transaction(function(tx){
+                tx.executeSql("DELETE FROM Collection WHERE _id =?",[ID],
+                             that.onSuccessRemove,
+                             that.onEror);
+                  alert("ok");
+            });
+            //alert("ok");
+        }
+    },
+    updateStatus : function(){
+        alert("update");
+        var that = this;
+        that.db.transaction(function(tx){
+           tx.executeSql("UPDATE Collection SET status=1");
+        });
+    },
     insertNewRecord : function(ID,name) {
         var that = this;
-        if(ID != null || $trim(ID) != "" && name != null || $trim(name) != ""){
-            that.db.transaction(function(tx) {
-            var cDate = new Date();
-            /*tx.executeSql("INSERT OR INTO CustommerTable(custommer_id, custommer_name, added_date) VALUES (?,?,?)",
-                          [ID, name, cDate],
-                          that.onSuccess,
-                          that.onError);*/
-                tx.executeSql("INSERT INTO CustommerTable(custommer_id, custommer_name, added_date) SELECT '"+ID+"','"+name+"','"+cDate+"' WHERE NOT EXISTS(SELECT * FROM CustommerTable WHERE custommer_id = '"+ID+"')",
-                          [ID, name, cDate],
-                          that.onSuccess,
-                          that.onError);
-                
-        });
+        var nameArr = [];
+        var render = function (tx, rs) {
+            
+            // rs contains our SQLite recordset, at this point you can do anything with it
+            // in this case we'll just loop through it and output the results to the console
+            for (var i = 0; i < rs.rows.length; i++) {
+                console.log(rs.rows.item(i).custommer_name);
+                nameArr.push(rs.rows.item(i).custommer_name); 
+            }
+            
+            if(nameArr.length == 0){
+                if(ID != null || $.trim(ID) != "" && name != null || $.trim(name) != ""){
+                    that.db.transaction(function(tx) {
+                    var cDate = new Date();
+                    tx.executeSql("INSERT OR IGNORE INTO CustommerTable(custommer_id, custommer_name, added_date) VALUES (?,?,?)",
+                                  [ID, name, cDate],
+                                  that.onSuccess,
+                                  that.onError);
+                        /*tx.executeSql("INSERT INTO CustommerTable(custommer_id, custommer_name, added_date) SELECT '"+ID+"','"+name+"','"+cDate+"' WHERE NOT EXISTS(SELECT * FROM CustommerTable WHERE custommer_id = '"+ID+"')",
+                                  [ID, name, cDate],
+                                  that.onSuccess,
+                                  that.onError);*/
+
+                	});
+                }
+            }else{
+                alert("already exist");
+            }
         }
+        
+        that.selectAllRecords(render,ID);
         
     },
     
+    deleteRecord : function(ID){
+        
+        var that = this;
+        if(ID != null || $trim(ID) != ""){
+            that.db.transaction(function(tx){
+                tx.executeSql("DELETE FROM CustommerTable WHERE custommer_id =?",[ID],
+                             that.onSuccessRemove,
+                             that.onEror);
+                  //alert("ok");
+            });
+            //alert("ok");
+        }
+    },
     onSuccess : function(tx, r) {
         console.log("Your SQLite query was successful!");
+        alert("Saved Successfully");
     },
 
     onError : function(tx, e) {
         console.log("SQLite Error: " + e.message);
     },
-    
+    onSuccessRemove : function(){
+        alert("successfully Removed");
+    },
     selectAllRecords : function(fn,ID) {
         var that = this;
         that.db.transaction(function(tx) {
             tx.executeSql("SELECT * FROM CustommerTable WHERE custommer_id='"+ID+"'ORDER BY id", [],
+                          fn,
+                          that.onError);
+        });
+        //console.log(that.nameArr);
+    },
+    selectRecordsFromCollection : function(fn,ID) {
+        var that = this;
+        that.db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM Collection WHERE status=0 AND custommer_id="+ID, [],
+                          fn,
+                          that.onError);
+        });
+        //console.log(that.nameArr);
+    },
+    selectRecordsToExport : function(fn) {
+        var that = this;
+        that.db.transaction(function(tx) {
+            tx.executeSql("SELECT * FROM Collection WHERE status=0", [],
                           fn,
                           that.onError);
         });

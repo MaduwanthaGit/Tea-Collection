@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div data-role="view" data-title="Remove Supplier" data-layout="main" data-init="showRemove">
+		<div id="container" style="overflow:hidden;width:100%; margin-top:5%">
+          <div id="inner" style="overflow:hidden;width: 100%">
+              <div style="float:left;height:50px" class="separetorLeft">
+                  <p class="right_align">ID:</p>
+             </div>
+             <div style="float:left;height:50px" class="separetor">
+                 <input class="inputBox center" id="IDTextFieldRemove" placeholder="New ID" type="number"/>
+                 <button data-role="button" class="button center inputButton" id="findButtonRemove">FIND</button>
+             </div>
+             
+          </div>
+            <div id="inner" style="overflow:hidden;width: 100%">
+              <div class="separetorLeft">
+                  <p class="right_align">Name:</p>
+             </div>
+             <div class="separetor">
+                 <p id="nameFieldRemove"></p>
+             </div>
+             
+          </div>
+        
+    </div>
+        <div id="container" style="overflow:hidden;width:100%">
+          <div id="inner" style="overflow:hidden;width: 100%" >
+             <div style="float:left;width:50%;height:50px" class="separetor">
+                  <button data-role="button" id="removeCustommereButton" class="button right_align" data-click="saveCustommer">DELETE</button>
+             </div>
+             <div style="float:left;width:50%;height:50px" class="separetor">
+                  <button data-role="button" id="cancelRemoveCustommerButton"class="button" id="cancelButton">CANCEL</button>
+             </div>
+          </div>
+        </div>
+  
+    
+</div>
+
+    </body>
+</html>

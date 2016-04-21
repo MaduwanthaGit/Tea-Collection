@@ -31,7 +31,9 @@
         <footer data-role="footer">
             <div data-role="tabstrip" id="navigation-container">
                 <a href="components/home/collection.html" data-icon="add">Collection</a>
-                <a href="components/home/add_custommer.html" data-icon="contacts ">Add Custommer</a>
+                <a href="components/home/add_custommer.html" data-icon="contacts ">Add Supplier</a>
+                <a href="components/home/remove_custommer.html" data-icon="trash ">Remove Supplier</a>
+                <a href="components/home/eddit_collection.html" data-icon="trash ">Remove Records</a>
             </div>
         </footer>
     </div>
@@ -39,6 +41,7 @@
     <div data-role="layout" data-id="main-nonav">
         <header data-role="header">
             <div data-role="navbar">
+                <a data-role="backbutton">Back</a>
                 <span data-role="view-title"></span>
             </div>
         </header>
@@ -49,6 +52,19 @@
     <script src="components/home/file_save.js"></script>
     <script src="components/home/index.js"></script>
     <style>
+        .km-flat .km-tabstrip .km-state-active{
+            background: green;
+        }
+        
+        .km-flat .km-navbar{
+            background-color:green;
+        }
+        
+        .km-flat .km-content {
+          background-color: #FFFFFF;
+        }
+        
+       
     	.center{
           position: relative;
           top: 50%;
@@ -58,7 +74,19 @@
         .inputBox {
         height:32px;
         width:220px; 
+        border-color:green;
+            border-radius:5px;
     }
+        .km-flat .km-button {
+          border-color: green;
+          background-color: white;
+          color: green;
+        }
+        
+        .km-flat .km-button.km-state-active{
+            background-color: green;
+            color: white;
+        }
         .right_align{
             float:right;
         }
@@ -66,6 +94,19 @@
             width:50%;
             float:left;
             height:50px;
+        }
+        .separetorLeft{
+            width:35%;
+            float:left;
+            height:50px;
+        }
+        .separetorRight{
+            width:65%;
+            float:left;
+            height:50px;
+        }
+        .km-flat .km-navbar{
+            color:white;
         }
     </style>
 </body>

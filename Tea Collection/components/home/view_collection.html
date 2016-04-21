@@ -1,5 +1,4 @@
-<!--<div data-role="view" data-title="Home View" data-layout="main" data-model="app.home" data-show="app.home.onShow" data-after-show="app.home.afterShow">-->
-<div data-role="view" data-title="Tea Collection" data-layout="main" data-init="show" >
+<div data-role="view" data-title="Tea Collection" data-layout="main-nonav"  data-show="showView" data-init="initView">
 
     <div class="content" style="margin-top: 5%;">
         <div id="container" style="overflow:hidden;width:100%">
@@ -8,8 +7,8 @@
                   <p class="right_align">ID:</p>
              </div>
              <div class="separetor">
-                 <input class="inputBox center" id="idField" placeholder="ID" type="number"/>
-                 <button data-role="button" class="button center inputButton" id="findButton">FIND</button>
+                 <input class="inputBox center" id="idFieldView" placeholder="ID" type="text"/>
+                 <button data-role="button" class="button center inputButton" id="findButtonView">FIND</button>
              </div>
              
           </div>
@@ -18,7 +17,7 @@
                   <p class="right_align">Name:</p>
              </div>
              <div class="separetor">
-                 <p id="nameField"></p>
+                 <p id="nameFieldView"></p>
              </div>
              
           </div>
@@ -27,7 +26,7 @@
                  <p class="right_align">Weight:</p>
              </div>
              <div class="separetor">
-                  <input class="inputBox center" style="clear:both" id="weightField" placeholder="0.00" type="number"/>
+                  <input class="inputBox center" style="clear:both" id="weightFieldView" placeholder="0.00" type="number"/>
              </div>
           </div>
             <div id="inner" style="overflow:hidden;width: 100%">
@@ -35,7 +34,7 @@
                  <p class="right_align">Net Weight:</p>
              </div>
              <div class="separetor">
-                  <input class="inputBox center" id="netWeightField" placeholder="0.00" type="number"/>
+                  <input class="inputBox center" id="netWeightFieldView" placeholder="0.00" type="number"/>
              </div>
           </div>
             <!--<div id="inner" style="overflow:hidden;width: 100%">
@@ -51,17 +50,17 @@
                  <p class="right_align">Advance:</p>
              </div>
              <div class="separetor">
-                  <input class="inputBox center" id="advanceField" placeholder="0.00" type="number"/>
+                  <input class="inputBox center" id="advanceFieldView" placeholder="0.00" type="number"/>
              </div>
           </div>
         </div>
         <div id="container" style="overflow:hidden;width:100%">
           <div id="inner" style="overflow:hidden;width: 100%">
              <div class="separetor">
-                 <button data-role="button" class="button right_align" id="writeFileButton">SAVE</button>
+                 <button data-role="button" class="button right_align" id="edditButtonView">EDDIT</button>
              </div>
              <div class="separetor">
-                  <button data-role="button" class="button" id="exportButton">EXPORT</button>
+                  <button data-role="button" class="button" id="deletelButtonView">DELETE</button>
              </div>
           </div>
         </div>

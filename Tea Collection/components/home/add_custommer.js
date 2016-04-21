@@ -1,12 +1,12 @@
 'use strict';
 function showAdd(){
-     alert("in");
+     //alert("in");
     var DBAppp = new DBApp();
-     alert("1");
+     //alert("1");
     DBAppp.run();
     DBAppp._openDB();
     DBAppp._createTable();
-    alert("done");
+    //alert("done");
 }
 /*app.addCustommer = kendo.observable({
     onShow: function() {
@@ -28,7 +28,7 @@ DBApp.prototype = {
     IDTextField : null,
     nameTextField : null,
     run: function() {
-        alert("in");
+        //alert("in");
 		var that = this,
     		saveCustommereButton = document.getElementById("saveCustommereButton"),
     		cancelSaveCustommerButton = document.getElementById("cancelSaveCustommerButton");
@@ -41,9 +41,9 @@ DBApp.prototype = {
             that.DbHelper.getAllTheData("1");
         })
         console.log(cancelSaveCustommerButton);
-        alert("in");
+        //alert("in");
 		that.DbHelper = new DBHelper();
-        alert("done");
+       // alert("done");
         console.log(that.DbHelper);
         
 	},
